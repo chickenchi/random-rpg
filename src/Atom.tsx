@@ -23,7 +23,19 @@ export const currentJunctionState = atom({
 
 export const currentPageState = atom({
   key: "currentPageState",
-  default: 1,
+  default: 0,
+});
+
+export const itemConditionState = atom({
+  key: "itemConditionState",
+  default: "",
+});
+
+// -------
+
+export const storyState = atom({
+  key: "storyState",
+  default: "",
 });
 
 export const gameStatusState = atom({
@@ -31,12 +43,27 @@ export const gameStatusState = atom({
   default: "Read",
 });
 
-export const pageScriptState = atom({
-  key: "pageScriptState",
-  default: "Read",
-});
-
-export const currentItemState = atom({
+export const currentItemState = atom<string[]>({
   key: "currentItemState",
   default: [],
+});
+
+export const giveItemState = atom({
+  key: "giveItemState",
+  default: "",
+});
+
+export const currentRoutePointState = atom<string[]>({
+  key: "currentRoutePointState",
+  default: [],
+});
+
+export const currentEventState = atom<string[]>({
+  key: "currentEventState",
+  default: [],
+});
+
+export const isAllowBackPageState = atom({
+  key: "isAllowBackPageState",
+  default: true,
 });

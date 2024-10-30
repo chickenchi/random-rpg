@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { pageScriptState } from "../../../../Atom";
+import { storyState } from "../../../../Atom";
 import { useRecoilState } from "recoil";
 
 const SelectionDiv = styled.div`
@@ -22,11 +22,11 @@ const Text = styled.p`
 `;
 
 const TextScreen = () => {
-  const [pageScript] = useRecoilState(pageScriptState);
+  const [story] = useRecoilState(storyState);
 
   return (
     <SelectionDiv>
-      <Text>{pageScript}</Text>
+      <Text>{story}</Text>
     </SelectionDiv>
   );
 };

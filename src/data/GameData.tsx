@@ -1,20 +1,27 @@
-type GameData = {
-  stage: {
-    phase: {
-      begin: { scene: SceneType[] };
-      [key: string]: { scene: SceneType[] }; // "왼쪽 길", "오른쪽 길" 등
-    }[];
-  }[];
-};
-
-type SceneType = {
+interface Scene {
   story: string | string[];
   gameStatus: string;
-  event?: string | string[];
-  condition?: string;
-};
+  event?: string[];
+  isAllowBackPage?: boolean;
+  itemCondition?: string;
+  giveItem?: string;
+}
 
-export const gameData = {
+interface Phase {
+  [key: string]: {
+    scene: Scene[];
+  };
+}
+
+interface Stage {
+  phase: Phase[];
+}
+
+interface GameDataSettings {
+  stage: Stage[];
+}
+
+export const gameData: GameDataSettings = {
   stage: [
     {
       phase: [
@@ -29,24 +36,34 @@ export const gameData = {
                 story: "어디로 갈까?",
                 gameStatus: "Select",
                 event: ["왼쪽 길", "오른쪽 길"],
+                isAllowBackPage: false,
               },
             ],
           },
           "왼쪽 길": {
             scene: [
               {
+                story: "왼쪽 길로 들어섰다.",
+                gameStatus: "Read",
+              },
+              {
                 story: ["잠겨 있다.", "탈출 성공!"],
                 gameStatus: "Read",
-                event: "도입",
-                condition: "열쇠",
+                event: ["begin"],
+                itemCondition: "열쇠",
+                isAllowBackPage: false,
               },
             ],
           },
           "오른쪽 길": {
             scene: [
               {
-                story: "열쇠를 발견했다.",
+                story: ["열쇠를 발견했다.", "아무것도 없는 것 같다."],
                 gameStatus: "Read",
+                event: ["begin"],
+                itemCondition: "!열쇠",
+                isAllowBackPage: false,
+                giveItem: "열쇠",
               },
             ],
           },
