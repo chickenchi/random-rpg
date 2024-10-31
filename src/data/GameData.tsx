@@ -5,6 +5,8 @@ interface Scene {
   isAllowBackPage?: boolean;
   itemCondition?: string;
   giveItem?: string;
+  endPoint?: boolean;
+  endingType?: string;
 }
 
 interface Phase {
@@ -52,6 +54,8 @@ export const gameData: GameDataSettings = {
                 event: ["begin"],
                 itemCondition: "열쇠",
                 isAllowBackPage: false,
+                endPoint: true,
+                endingType: "happy",
               },
             ],
           },

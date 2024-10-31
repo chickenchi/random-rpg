@@ -6,6 +6,7 @@ import {
   currentItemState,
   currentPageState,
   currentRouteState,
+  endPointState,
   giveItemState,
   isAllowBackPageState,
 } from "../../../../Atom";
@@ -33,17 +34,23 @@ const MoveButton = styled.button`
 `;
 
 const PreviousButton = styled(MoveButton)``;
+const EndButton = styled(MoveButton)`
+  margin-right: 0;
+`;
 const NextButton = styled(MoveButton)`
   margin-right: 0;
 `;
 
 const MoveScene = () => {
   const [currentPage, setCurrentPage] = useRecoilState(currentPageState);
-  const [isAllowBackPage] = useRecoilState(isAllowBackPageState);
-  const [event, setEvent] = useRecoilState(currentEventState);
-  const [currentRoute, setCurrentRoute] = useRecoilState(currentRouteState);
   const [currentItem, setCurrentItem] = useRecoilState(currentItemState);
+
+  const [, setCurrentRoute] = useRecoilState(currentRouteState);
+
+  const [isAllowBackPage] = useRecoilState(isAllowBackPageState);
+  const [event] = useRecoilState(currentEventState);
   const [giveItem] = useRecoilState(giveItemState);
+  const [endPoint] = useRecoilState(endPointState);
 
   const previousScene = () => {
     setCurrentPage(currentPage - 1);
@@ -56,18 +63,27 @@ const MoveScene = () => {
 
     if (event.length) {
       setCurrentRoute(event[0]);
-      setEvent([]);
     } else {
       setCurrentPage(currentPage + 1);
     }
   };
 
+  const endScene = () => {
+    window.location.href = "/end";
+  };
+
   return (
     <MoveLevelDiv>
-      {isAllowBackPage && currentPage !== 0 && (
-        <PreviousButton onClick={previousScene}>이전</PreviousButton>
+      {!endPoint ? (
+        <>
+          {isAllowBackPage && currentPage !== 0 && (
+            <PreviousButton onClick={previousScene}>이전</PreviousButton>
+          )}
+          <NextButton onClick={nextScene}>다음</NextButton>
+        </>
+      ) : (
+        <EndButton onClick={endScene}>완료</EndButton>
       )}
-      <NextButton onClick={nextScene}>다음</NextButton>
     </MoveLevelDiv>
   );
 };

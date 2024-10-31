@@ -67,3 +67,8 @@ export const isAllowBackPageState = atom({
   key: "isAllowBackPageState",
   default: true,
 });
+
+export const endPointState = atom({
+  key: "endPointState",
+  default: false,
+});

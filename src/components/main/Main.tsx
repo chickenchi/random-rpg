@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import GameScreen from "./components/GameScreen";
-import GameManager from "./components/GameManager";
+import GameScreen from "./mainComponents/GameScreen";
+import GameManager from "./mainComponents/GameManager";
 
 const MainDiv = styled.div`
   height: 90%;
@@ -13,8 +13,6 @@ const MainDiv = styled.div`
 `;
 
 const Main = () => {
-  useEffect(() => {}, []);
-
   return (
     <MainDiv>
       <GameManager />

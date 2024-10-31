@@ -90,10 +90,12 @@ const Selection = () => {
   };
 
   useEffect(() => {
-    let eventList = shuffleArray(eventPage.slice());
+    if (eventPage) {
+      let eventList = shuffleArray(eventPage.slice());
 
-    setEvents(eventList);
-  }, []);
+      setEvents(eventList);
+    }
+  }, [eventPage]);
 
   const previousScene = () => {
     setCurrentPage(currentPage - 1);
@@ -114,7 +116,6 @@ const Selection = () => {
     if (events) {
       setCurrentRoute(events[answerValue - 1]);
       setRoutePoint([...routePoint, events[answerValue - 1]]);
-      setEvents([]);
       setCurrentPage(0);
     }
   };
