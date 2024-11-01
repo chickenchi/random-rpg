@@ -2,7 +2,7 @@
   "name": "randomrpg",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chickenchi.github.io/random-rpg-build",
+  "homepage": "https://chickenchi.github.io/random-rpg/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
