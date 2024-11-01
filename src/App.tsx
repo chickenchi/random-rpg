@@ -8,7 +8,7 @@ import End from "./components/end/End";
 const App = () => {
   return (
     <RecoilRoot>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
