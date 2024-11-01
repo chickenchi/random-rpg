@@ -8,8 +8,14 @@ const HeaderDiv = styled.div`
   align-items: center;
 `;
 
+const HomeLink = styled.a`
+  text-decoration: none;
+`;
+
 const Title = styled.h1`
   margin-left: 30px;
+
+  color: rgb(80, 80, 80);
 
   font-size: 24pt;
   font-weight: 500;
@@ -18,7 +24,9 @@ const Title = styled.h1`
 const Header = () => {
   return (
     <HeaderDiv>
-      <Title>랜덤 RPG</Title>
+      <HomeLink href="/">
+        <Title>랜덤 RPG</Title>
+      </HomeLink>
     </HeaderDiv>
   );
 };

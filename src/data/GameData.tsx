@@ -3,7 +3,7 @@ interface Scene {
   gameStatus: string;
   event?: string[];
   isAllowBackPage?: boolean;
-  itemCondition?: string;
+  itemCondition?: string[];
   giveItem?: string;
   endPoint?: boolean;
   endingType?: string;
@@ -31,43 +31,87 @@ export const gameData: GameDataSettings = {
           begin: {
             scene: [
               {
-                story: "나는 이곳에 왔다.",
+                story: `개발자가 되기 위해선
+몇 가지의 도구가 필요하다.`,
                 gameStatus: "Read",
               },
               {
-                story: "어디로 갈까?",
+                story: `그래서 나는 도구를 챙기기로
+해서 상점에 왔다.`,
+                gameStatus: "Read",
+              },
+              {
+                story: `하하, 여기 도구 다 있네! 뭘 사겠는가?
+본체, 모니터, 키보드, 마우스가 있네!
+(근데 저기에 있는 물건 다 필요한데...)`,
                 gameStatus: "Select",
-                event: ["왼쪽 길", "오른쪽 길"],
+                event: ["본체", "모니터", "키보드", "마우스"],
                 isAllowBackPage: false,
               },
             ],
           },
-          "왼쪽 길": {
+          본체: {
             scene: [
               {
-                story: "왼쪽 길로 들어섰다.",
+                story: ["본체를 얻었다.", "이미 받았다."],
                 gameStatus: "Read",
-              },
-              {
-                story: ["잠겨 있다.", "탈출 성공!"],
-                gameStatus: "Read",
-                event: ["begin"],
-                itemCondition: "열쇠",
+                itemCondition: ["!본체"],
+                event: ["집"],
                 isAllowBackPage: false,
+                giveItem: "본체",
+              },
+            ],
+          },
+          모니터: {
+            scene: [
+              {
+                story: ["모니터를 얻었다.", "이미 받았다."],
+                gameStatus: "Read",
+                itemCondition: ["!모니터"],
+                event: ["집"],
+                isAllowBackPage: false,
+                giveItem: "모니터",
+              },
+            ],
+          },
+          키보드: {
+            scene: [
+              {
+                story: ["키보드를 얻었다.", "이미 받았다."],
+                gameStatus: "Read",
+                itemCondition: ["!키보드"],
+                event: ["집"],
+                isAllowBackPage: false,
+                giveItem: "키보드",
+              },
+            ],
+          },
+          마우스: {
+            scene: [
+              {
+                story: ["마우스를 얻었다.", "이미 받았다."],
+                gameStatus: "Read",
+                itemCondition: ["!마우스"],
+                event: ["집"],
+                isAllowBackPage: false,
+                giveItem: "마우스",
+              },
+            ],
+          },
+          집: {
+            scene: [
+              {
+                story: [
+                  "아직 모든 재료를 모으지 않았다.",
+                  `모든 재료를 모았다.
+이제 즐겁게 코딩할 준비만 남았다.`,
+                ],
+                gameStatus: "Read",
+                itemCondition: ["키보드", "모니터", "본체"],
+                event: ["begin"],
                 endPoint: true,
                 endingType: "happy",
-              },
-            ],
-          },
-          "오른쪽 길": {
-            scene: [
-              {
-                story: ["열쇠를 발견했다.", "아무것도 없는 것 같다."],
-                gameStatus: "Read",
-                event: ["begin"],
-                itemCondition: "!열쇠",
                 isAllowBackPage: false,
-                giveItem: "열쇠",
               },
             ],
           },

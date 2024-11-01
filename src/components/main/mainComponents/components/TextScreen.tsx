@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { storyState } from "../../../../Atom";
 import { useRecoilState } from "recoil";
 
-const SelectionDiv = styled.div`
+const DescribeDiv = styled.div`
   background-color: white;
 
   width: 90%;
@@ -14,9 +14,11 @@ const SelectionDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 const Text = styled.p`
+  color: rgb(50, 50, 50);
   font-size: 15pt;
   font-weight: 500;
 `;
@@ -25,9 +27,11 @@ const TextScreen = () => {
   const [story] = useRecoilState(storyState);
 
   return (
-    <SelectionDiv>
-      <Text>{story}</Text>
-    </SelectionDiv>
+    <DescribeDiv>
+      {story.split("\n").map((line, index) => (
+        <Text key={index}>{line}</Text>
+      ))}
+    </DescribeDiv>
   );
 };
 

@@ -69,7 +69,6 @@ const MoveButton = styled.button`
 const PreviousButton = styled(MoveButton)``;
 
 const Selection = () => {
-  const [minIndex, setMinIndex] = useState<number>(1);
   const [maxIndex, setMaxIndex] = useState<number>(2);
   const [answer, setAnswer] = useState<string>("");
   const [events, setEvents] = useState<string[] | null>(null);
@@ -91,7 +90,11 @@ const Selection = () => {
 
   useEffect(() => {
     if (eventPage) {
-      let eventList = shuffleArray(eventPage.slice());
+      let eventList = eventPage.slice();
+      let eventListCount = eventList.length;
+      setMaxIndex(eventListCount);
+
+      eventList = shuffleArray(eventList);
 
       setEvents(eventList);
     }
@@ -104,11 +107,7 @@ const Selection = () => {
   const confirm = () => {
     let answerValue = parseInt(answer);
 
-    if (
-      minIndex > answerValue ||
-      maxIndex < answerValue ||
-      isNaN(answerValue)
-    ) {
+    if (1 > answerValue || maxIndex < answerValue || isNaN(answerValue)) {
       alert("값을 넘었거나 유효하지 않는 값입니다.");
       return;
     }
@@ -133,9 +132,7 @@ const Selection = () => {
 
   return (
     <SelectionDiv>
-      <SelectTitle>
-        {minIndex}부터 {maxIndex}까지 중에 고르세요!
-      </SelectTitle>
+      <SelectTitle>1부터 {maxIndex}까지 중에 고르세요!</SelectTitle>
 
       <AnswerDiv>
         {isAllowBackPage && (

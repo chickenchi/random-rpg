@@ -26,14 +26,14 @@ export const currentPageState = atom({
   default: 0,
 });
 
-export const itemConditionState = atom({
+export const itemConditionState = atom<string[]>({
   key: "itemConditionState",
-  default: "",
+  default: [],
 });
 
 // -------
 
-export const storyState = atom({
+export const storyState = atom<string>({
   key: "storyState",
   default: "",
 });

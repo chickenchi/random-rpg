@@ -57,11 +57,11 @@ const MoveScene = () => {
   };
 
   const nextScene = () => {
-    if (giveItem) {
-      setCurrentItem([...currentItem, giveItem]);
-    }
-
     if (event.length) {
+      if (giveItem.length && !currentItem.includes(giveItem)) {
+        setCurrentItem([...currentItem, giveItem]);
+      }
+
       setCurrentRoute(event[0]);
     } else {
       setCurrentPage(currentPage + 1);

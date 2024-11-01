@@ -5,8 +5,10 @@ import MoveScene from "./components/MoveLevel";
 import Selection from "./components/Selection";
 import { useRecoilState } from "recoil";
 import { gameStatusState } from "../../../Atom";
+import ItemScreen from "./components/ItemScreen";
 
 const GameScreenDiv = styled.div`
+  position: relative;
   background-color: #e0e0e0;
 
   width: 80%;
@@ -23,6 +25,7 @@ const GameScreen = () => {
 
   return (
     <GameScreenDiv>
+      <ItemScreen />
       <TextScreen />
       {gameStatus === "Read" ? <MoveScene /> : <Selection />}
     </GameScreenDiv>

@@ -39,26 +39,32 @@ const GameManager = () => {
     const selectedScene = phase[direction].scene[currentPage];
 
     const story = selectedScene.story;
-    const itemCondition = selectedScene.itemCondition ?? "";
+    const itemCondition = selectedScene.itemCondition ?? [];
     let itemResult = false;
 
     if (typeof story === "string") setStory(story);
     else {
-      if (itemCondition.includes("!")) {
-        const iteCd = itemCondition.split("!")[1];
+      let itemConditionCount = itemCondition.length;
+      let allDone = true;
+
+      for (let i = 0; i < itemConditionCount; i++) {
+        let iteCd = "";
+        if (itemCondition[i].includes("!")) {
+          iteCd = itemCondition[i].split("!")[1];
+        } else {
+          iteCd = itemCondition[i];
+        }
 
         if (!currentItem.includes(iteCd)) {
-          setStory(story[0]);
-        } else {
-          setStory(story[1]);
+          allDone = false;
         }
+      }
+
+      if (allDone) {
+        setStory(story[1]);
+        itemResult = true;
       } else {
-        if (currentItem.includes(itemCondition)) {
-          setStory(story[1]);
-          itemResult = true;
-        } else {
-          setStory(story[0]);
-        }
+        setStory(story[0]);
       }
     }
 
@@ -75,7 +81,7 @@ const GameManager = () => {
     setEvent(event);
 
     const endPoint = selectedScene.endPoint ?? false;
-    if (itemCondition !== "" && !itemResult) {
+    if (!itemCondition.length || !itemResult) {
       // 아이템 컨디션이 있는데 아이템이 없는 경우를 제외하고
     } else {
       // 끝 포인트 지정
@@ -88,6 +94,12 @@ const GameManager = () => {
   useEffect(() => {
     nextSetting();
   }, [currentPage, currentStage, currentPhase, currentRoute]);
+
+  const reset = 1;
+
+  useEffect(() => {
+    saveToLocalStorage("endingType", "");
+  }, [reset]);
 
   return null;
 };
