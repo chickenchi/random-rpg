@@ -63,6 +63,7 @@ const MoveScene = () => {
       }
 
       setCurrentRoute(event[0]);
+      setCurrentPage(0);
     } else {
       setCurrentPage(currentPage + 1);
     }

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { storyState } from "../../../../Atom";
+import { currentEventState, storyState } from "../../../../Atom";
 import { useRecoilState } from "recoil";
 
 const DescribeDiv = styled.div`
@@ -25,11 +25,31 @@ const Text = styled.p`
 
 const TextScreen = () => {
   const [story] = useRecoilState(storyState);
+  const [event] = useRecoilState(currentEventState);
+
+  const [eventFormat, setEventFormat] = useState("");
+
+  useEffect(() => {
+    let stringEvent = "";
+
+    event.forEach((e) => {
+      stringEvent += e + ", ";
+    });
+
+    stringEvent = `[${stringEvent}]`;
+    stringEvent = stringEvent.replace(", ]", "]");
+
+    setEventFormat(stringEvent);
+  }, [event]);
 
   return (
     <DescribeDiv>
       {story.split("\n").map((line, index) => (
-        <Text key={index}>{line}</Text>
+        <Text key={index}>
+          {line.includes("[getEvent]")
+            ? line.replace("[getEvent]", eventFormat)
+            : line}
+        </Text>
       ))}
     </DescribeDiv>
   );
